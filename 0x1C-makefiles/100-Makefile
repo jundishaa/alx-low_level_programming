@@ -1,25 +1,36 @@
-NAME = school
-SRC = $(wildcard *.c)
-OBJ = $(SRC:.c=.o)
-CFLAGS = -Wall -Werror -Wextra -pedantic
+# Makefile for 'school' project
 
+# Compiler
+CC := gcc
+
+# Source files
+SRC := main.c school.c
+
+# Object files (derived from source files)
+OBJ := $(SRC:.c=.o)
+
+# Executable name
+NAME := school
+
+# Flags for the compiler
+CFLAGS := -Wall -Werror -Wextra -pedantic
+
+# Targets and rules
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(OBJ) -o $(NAME)
 
 clean:
-	$(RM) *~ \#*\#
+	$(RM) $(OBJ) $(NAME)
 
 oclean:
 	$(RM) $(OBJ)
 
-fclean: oclean
+fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
-
-$(OBJ): m.h
 
 .PHONY: all clean oclean fclean re
 
