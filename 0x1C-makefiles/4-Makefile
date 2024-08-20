@@ -1,36 +1,27 @@
-# Makefile for 'school' project
+# Variables
+CC = gcc
+SRC = main.c school.c
+OBJ = $(SRC:.c=.o)
+NAME = school
+RM = rm -f
+CFLAGS = -Wall -Werror -Wextra -pedantic
 
-# Compiler
-CC := gcc
-
-# Source files
-SRC := main.c school.c
-
-# Object files
-OBJ := $(SRC:.c=.o)
-
-# Executable name
-NAME := school
-
-# Program to delete files
-RM := rm -f
-
-# Compiler flags
-CFLAGS := -Wall -Werror -Wextra -pedantic
-
-# Targets and rules
+# Rules
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
 
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	$(RM) $(OBJ) $(NAME)
+	$(RM) *~ \#*\# $(NAME)
 
 oclean:
 	$(RM) $(OBJ)
 
-fclean: clean
+fclean: clean oclean
 
 re: fclean all
 
